@@ -34,8 +34,6 @@ const customizeUI = (instance) => {
 
   UI.setToolbarGroup('toolbarGroup-EditText');
 
-
-
   const resetButton = new UI.Components.CustomButton({
     dataElement: 'resetButton',
     className: 'custom-button-class',
@@ -98,6 +96,8 @@ WebViewer({
         await writer.beginOnPage(page);
         const font = await PDFNet.Font.create(doc, PDFNet.Font.StandardType1Font.e_helvetica);
         const fontBold = await PDFNet.Font.create(doc, PDFNet.Font.StandardType1Font.e_helvetica_bold);
+
+        // Add Table Headers;
         for (let col = 0; col < headers.length; col++) {
           const x = startX + col * cellWidth;
           const y = startY;
@@ -112,6 +112,8 @@ WebViewer({
           writer.writeElement(textElement);
           writer.writeElement(await builder.createTextEnd());
         }
+
+        // Add other rows
         for (let row = 0; row < jsonTestData.length; row++) {
           for (let col = 0; col < headers.length; col++) {
             const key = headers[col];
